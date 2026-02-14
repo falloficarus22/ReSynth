@@ -6,7 +6,7 @@ from typing import List, Dict, Any, Optional
 import logging
 from ..embeddings.vector_store import VectorStore
 from .query_processor import QueryProcessor
-from config import Config
+from ..config import Config
 
 logger = logging.getLogger(__name__)
 

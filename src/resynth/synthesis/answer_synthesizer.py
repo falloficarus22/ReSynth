@@ -7,7 +7,7 @@ import logging
 from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from .citation_formatter import CitationFormatter, Citation
-from config import Config
+from ..config import Config
 
 logger = logging.getLogger(__name__)
 

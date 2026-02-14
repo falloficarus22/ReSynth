@@ -1,4 +1,4 @@
-# 🧠 ReSynth - Research Paper Synthesis Agent
+# ReSynth - Research Paper Synthesis Agent
 
 [![PyPI version](https://badge.fury.io/py/resynth.svg)](https://badge.fury.io/py/resynth)
 [![Python versions](https://img.shields.io/pypi/pyversions/resynth)](https://pypi.org/project/resynth/)
@@ -8,17 +8,17 @@
 
 **ReSynth** is an intelligent agent that fetches research papers, processes them through advanced chunking and embedding, and answers queries with proper academic citations. Perfect for researchers, students, and anyone working with academic literature.
 
-## ✨ Features
+## Features
 
-- **🔍 Multi-Source Paper Fetching**: Retrieve papers from arXiv, PubMed, and more
-- **🧠 Intelligent Processing**: Advanced text chunking with semantic boundaries
-- **💾 Vector Storage**: Efficient storage and retrieval with ChromaDB
-- **🤖 AI-Powered Answers**: Synthesize responses using OpenAI or local models
-- **📚 Citation Management**: Automatic citation generation in multiple styles (APA, MLA, numeric)
-- **🌐 Multiple Interfaces**: Web UI, REST API, and command-line interface
-- **⚡ Quality Metrics**: Retrieval quality validation and confidence scoring
+- **Multi-Source Paper Fetching**: Retrieve papers from arXiv, PubMed, and more
+- **Intelligent Processing**: Advanced text chunking with semantic boundaries
+- **Vector Storage**: Efficient storage and retrieval with ChromaDB
+- **AI-Powered Answers**: Synthesize responses using OpenAI or local models
+- **Citation Management**: Automatic citation generation in multiple styles (APA, MLA, numeric)
+- **Multiple Interfaces**: Web UI, REST API, and command-line interface
+- **Quality Metrics**: Retrieval quality validation and confidence scoring
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -190,7 +190,7 @@ methods = agent.query(
 )
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ReSynth/
@@ -202,7 +202,7 @@ ReSynth/
 └── Citation Manager   # Automatic citation formatting
 ```
 
-## 🎯 Citation Styles
+## Citation Styles
 
 ReSynth supports multiple citation formats:
 
@@ -211,7 +211,7 @@ ReSynth supports multiple citation formats:
 - **Numeric**: [1], [2], [3]
 - **Author-Date**: (Smith, 2023)
 
-## 📊 Quality Metrics
+## Quality Metrics
 
 Every answer includes quality assessment:
 
@@ -220,7 +220,7 @@ Every answer includes quality assessment:
 - **Source Diversity**: Number of unique papers referenced
 - **Similarity Metrics**: Average and minimum similarity scores
 
-## 🌐 API Endpoints
+## API Endpoints
 
 When running the API server:
 
@@ -248,7 +248,7 @@ GET /stats
 GET /papers
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -262,7 +262,7 @@ pytest -m unit      # Unit tests only
 pytest -m integration  # Integration tests only
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
@@ -283,13 +283,13 @@ pre-commit install
 make test
 ```
 
-## 📖 Documentation
+## Documentation
 
 - [Full Documentation](https://github.com/resynth-ai/resynth/blob/main/docs/README.md)
 - [API Reference](https://github.com/resynth-ai/resynth/blob/main/docs/api.md)
 - [Examples](https://github.com/resynth-ai/resynth/blob/main/examples/)
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] Support for more paper sources (IEEE Xplore, Google Scholar)
 - [ ] Advanced query expansion with semantic search
@@ -298,23 +298,23 @@ make test
 - [ ] Export to various formats (LaTeX, Word, Markdown)
 - [ ] Integration with reference managers (Zotero, Mendeley)
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Built with [FastAPI](https://fastapi.tiangolo.com/), [Streamlit](https://streamlit.io/), and [ChromaDB](https://www.trychroma.com/)
 - Paper fetching powered by [arXiv](https://arxiv.org/) and [PubMed](https://pubmed.ncbi.nlm.nih.gov/)
 - Embeddings from [OpenAI](https://openai.com/) and [Hugging Face](https://huggingface.co/)
 - Citation formatting inspired by academic standards
 
-## 📞 Support
+## Support
 
-- 🐛 [Report Issues](https://github.com/resynth-ai/resynth/issues)
-- 💬 [Discussions](https://github.com/resynth-ai/resynth/discussions)
-- 📧 [Email](mailto:resynth@example.com)
+- [Report Issues](https://github.com/resynth-ai/resynth/issues)
+- [Discussions](https://github.com/resynth-ai/resynth/discussions)
+- [Email](mailto:resynth@example.com)
 
 ---
 
-**⭐ If you find ReSynth useful, please give us a star on GitHub!**
+**If you find ReSynth useful, please give us a star on GitHub!**

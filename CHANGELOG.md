@@ -20,6 +20,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Command-line interface
 - Comprehensive test suite
 - Documentation and examples
+- Version release workflow and documentation
+
+### Changed
+- Updated README formatting for better PyPI compatibility
 
 ### Features
 - **Paper Fetching**: Search and download papers from arXiv and PubMed
@@ -31,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Citation Management**: Automatic citation generation in multiple styles
 - **Quality Metrics**: Retrieval quality validation and confidence scoring
 
-## [0.1.0] - 2024-02-14
+## [0.1.0] - 2026-02-14
 
 ### Added
 - Initial release

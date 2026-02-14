@@ -7,7 +7,7 @@ from typing import List, Union, Optional
 import logging
 from sentence_transformers import SentenceTransformer
 import openai
-from config import Config
+from ..config import Config
 
 logger = logging.getLogger(__name__)
 

@@ -8,7 +8,7 @@ from typing import List, Dict, Any, Optional, Tuple
 import logging
 from ..processors.chunker import Chunk
 from .embedding_manager import EmbeddingManager
-from config import Config
+from ..config import Config
 
 logger = logging.getLogger(__name__)
 

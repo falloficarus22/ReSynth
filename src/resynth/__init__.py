@@ -2,7 +2,7 @@
 ReSynth - Research Paper Synthesis Agent
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "ReSynth Team"
 __email__ = "resynth@example.com"
 __license__ = "MIT"

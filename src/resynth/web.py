@@ -10,7 +10,7 @@ def main():
         import os
         
         # Add the project root to Python path for imports
-        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         sys.path.insert(0, project_root)
         
         from app import main as app_main
