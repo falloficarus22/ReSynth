@@ -1,0 +1,73 @@
+# Include additional files in the distribution
+
+# Documentation
+include README.md
+include CHANGELOG.md
+include CONTRIBUTING.md
+include LICENSE
+include MANIFEST.in
+
+# Configuration files
+include pyproject.toml
+include requirements.txt
+include .env.example
+include Makefile
+
+# Source files
+recursive-include src *.py
+recursive-include src *.yaml
+recursive-include src *.yml
+recursive-include src *.json
+recursive-include src *.txt
+recursive-include src *.md
+
+# Test files
+recursive-include tests *.py
+recursive-include tests *.yaml
+recursive-include tests *.json
+
+# Static files (if any)
+recursive-include src *.css
+recursive-include src *.js
+recursive-include src *.html
+recursive-include src *.png
+recursive-include src *.jpg
+recursive-include src *.gif
+recursive-include src *.ico
+
+# Templates (if any)
+recursive-include src *.html
+recursive-include src *.jinja2
+
+# Exclude development files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .DS_Store
+global-exclude *.so
+global-exclude .coverage
+global-exclude .pytest_cache
+global-exclude .mypy_cache
+global-exclude .tox
+global-exclude build
+global-exclude dist
+global-exclude *.egg-info
+
+# Exclude environment files
+exclude .env
+exclude .venv
+exclude venv/
+exclude env/
+exclude ENV/
+
+# Exclude IDE files
+exclude .vscode/
+exclude .idea/
+exclude *.swp
+exclude *.swo
+
+# Exclude OS files
+exclude Thumbs.db
+exclude *.log
