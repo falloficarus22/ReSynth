@@ -6,7 +6,14 @@ def main():
     """Main web interface entry point"""
     try:
         import streamlit as st
-        from ..app import main as app_main
+        import sys
+        import os
+        
+        # Add the project root to Python path for imports
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.insert(0, project_root)
+        
+        from app import main as app_main
         app_main()
     except ImportError:
         print("❌ Streamlit not installed. Install with: pip install streamlit")

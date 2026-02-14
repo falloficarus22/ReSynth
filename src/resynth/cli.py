@@ -4,10 +4,14 @@ Command-line interface for ReSynth package
 
 import argparse
 import sys
-from . import ReSynthAgent
+import os
 
 def main():
     """Main CLI entry point for the package"""
+    # Add the project root to Python path for imports
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0, project_root)
+    
     parser = argparse.ArgumentParser(
         description="ReSynth - Research Paper Synthesis Agent CLI",
         formatter_class=argparse.RawDescriptionHelpFormatter
@@ -55,6 +59,7 @@ def main():
         return
     
     # Initialize agent
+    from src import ReSynthAgent
     agent = ReSynthAgent()
     
     try:
@@ -101,11 +106,11 @@ def main():
                 print("❌ Failed to clear database")
         
         elif args.command == 'web':
-            from ..app import main as web_main
+            from src.web import main as web_main
             web_main()
         
         elif args.command == 'api':
-            from ..main import app
+            from main import app
             import uvicorn
             uvicorn.run(app, host="0.0.0.0", port=8000)
     

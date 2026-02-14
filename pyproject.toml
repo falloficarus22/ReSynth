@@ -99,7 +99,7 @@ Changelog = "https://github.com/resynth-ai/resynth/blob/main/CHANGELOG.md"
 resynth = "resynth.cli:main"
 
 [tool.setuptools.dynamic]
-version = {attr = "resynth.__version__"}
+version = {attr = "src.resynth.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
