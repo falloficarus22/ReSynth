@@ -4,7 +4,7 @@ ReSynth - Research Paper Synthesis Agent
 
 __version__ = "0.1.1"
 __author__ = "ReSynth Team"
-__email__ = "resynth@example.com"
+__email__ = "norizzabhii@gmail.com"
 __license__ = "MIT"
 
 # Import main classes for easy access
