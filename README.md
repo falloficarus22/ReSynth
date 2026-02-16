@@ -88,6 +88,36 @@ resynth-api
 # Interactive docs at http://localhost:8000/docs
 ```
 
+## Google Colab Usage
+
+ReSynth works seamlessly in Google Colab without .env files:
+
+### Quick Start
+```python
+import resynth
+
+# Auto-configure for Colab
+resynth.Config.setup_for_colab()
+
+# Initialize and use
+agent = resynth.ReSynthAgent()
+papers = agent.search_and_process("machine learning", max_papers=3)
+answer = agent.query("What is deep learning?")
+```
+
+### With OpenAI API Key
+```python
+import resynth
+
+# Setup with API key
+resynth.Config.setup_for_colab(openai_api_key="your-key-here")
+
+agent = resynth.ReSynthAgent()
+# Better answers with OpenAI
+```
+
+**See `examples/colab_setup.ipynb` for complete Colab examples.**
+
 ## Requirements
 
 - Python 3.8+
