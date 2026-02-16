@@ -20,7 +20,7 @@ from config import Config
 # Page configuration
 st.set_page_config(
     page_title="ReSynth - Research Paper Synthesis",
-    page_icon="🧠",
+    page_icon="R",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -83,12 +83,12 @@ def main():
     """Main Streamlit application"""
     
     # Header
-    st.markdown('<div class="main-header">🧠 ReSynth</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">ReSynth</div>', unsafe_allow_html=True)
     st.markdown('<p style="text-align: center; color: #7f8c8d; font-size: 1.1rem;">Research Paper Synthesis Agent</p>', unsafe_allow_html=True)
     
     # Sidebar
     with st.sidebar:
-        st.markdown("## ⚙️ Settings")
+        st.markdown("## Settings")
         
         # Citation style
         citation_style = st.selectbox(
@@ -98,12 +98,12 @@ def main():
         )
         
         # Retrieval settings
-        st.markdown("### 🔍 Retrieval Settings")
+        st.markdown("### Retrieval Settings")
         top_k = st.slider("Top K Results", min_value=1, max_value=20, value=5)
         similarity_threshold = st.slider("Similarity Threshold", min_value=0.0, max_value=1.0, value=0.7, step=0.05)
         
         # System info
-        st.markdown("### 📊 System Info")
+        st.markdown("### System Info")
         if st.button("Refresh Stats"):
             st.rerun()
         
@@ -116,7 +116,7 @@ def main():
             st.error(f"Error loading stats: {e}")
         
         # Clear database button
-        if st.button("🗑️ Clear Database", type="secondary"):
+        if st.button("Clear Database", type="secondary"):
             try:
                 st.session_state.vector_store.clear_collection()
                 st.success("Database cleared!")
@@ -125,7 +125,7 @@ def main():
                 st.error(f"Error clearing database: {e}")
     
     # Main content tabs
-    tab1, tab2, tab3 = st.tabs(["🔍 Search & Process", "💬 Query Papers", "📚 Database"])
+    tab1, tab2, tab3 = st.tabs(["Search & Process", "Query Papers", "Database"])
     
     with tab1:
         search_and_process_tab()
@@ -138,7 +138,7 @@ def main():
 
 def search_and_process_tab():
     """Search and process papers tab"""
-    st.markdown('<div class="section-header">🔍 Search & Process Papers</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Search & Process Papers</div>', unsafe_allow_html=True)
     
     col1, col2 = st.columns([2, 1])
     
@@ -165,7 +165,7 @@ def search_and_process_tab():
         fetch_content = st.checkbox("Fetch Full Content", value=True)
     
     with col3:
-        process_button = st.button("🚀 Process Papers", type="primary")
+        process_button = st.button("Process Papers", type="primary")
     
     if process_button and query:
         with st.spinner("Searching and processing papers..."):
@@ -208,23 +208,23 @@ def search_and_process_tab():
                         progress_bar.progress((i + 1) / len(papers))
                 
                 # Chunk papers
-                st.info("✂️ Chunking papers...")
+                st.info("Chunking papers...")
                 chunker = SemanticChunker(chunk_size=Config.CHUNK_SIZE, chunk_overlap=Config.CHUNK_OVERLAP)
                 chunks = chunker.chunk_multiple_papers(papers)
                 
                 # Add to vector store
-                st.info("💾 Adding to vector store...")
+                st.info("Adding to vector store...")
                 success = st.session_state.vector_store.add_chunks(chunks)
                 
                 if success:
-                    st.success(f"✅ Successfully processed {len(papers)} papers into {len(chunks)} chunks!")
+                    st.success(f"Successfully processed {len(papers)} papers into {len(chunks)} chunks!")
                     st.session_state.processed_papers.extend(papers)
                     
                     # Display processed papers
-                    st.markdown('<div class="section-header">📚 Processed Papers</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="section-header">Processed Papers</div>', unsafe_allow_html=True)
                     
                     for i, paper in enumerate(papers):
-                        with st.expander(f"📄 {paper.title}"):
+                        with st.expander(f"{paper.title}"):
                             col1, col2 = st.columns(2)
                             
                             with col1:
@@ -243,11 +243,11 @@ def search_and_process_tab():
                             with col2:
                                 if paper.arxiv_id:
                                     st.write(f"**arXiv ID:** {paper.arxiv_id}")
-                                    st.markdown(f"[📄 View Paper]({paper.url})")
+                                    st.markdown(f"[View Paper]({paper.url})")
                                 
                                 if paper.pubmed_id:
                                     st.write(f"**PubMed ID:** {paper.pubmed_id}")
-                                    st.markdown(f"[📄 View Paper]({paper.url})")
+                                    st.markdown(f"[View Paper]({paper.url})")
                                 
                                 if paper.doi:
                                     st.write(f"**DOI:** {paper.doi}")
@@ -256,7 +256,7 @@ def search_and_process_tab():
                             st.write(paper.abstract)
                             
                             if fetch_content and paper.content:
-                                with st.expander("📖 Full Content"):
+                                with st.expander("Full Content"):
                                     st.text_area("", paper.content, height=300, disabled=True)
                 else:
                     st.error("Failed to add chunks to vector store")
@@ -266,7 +266,7 @@ def search_and_process_tab():
 
 def query_tab(citation_style: str, top_k: int, similarity_threshold: float):
     """Query papers tab"""
-    st.markdown('<div class="section-header">💬 Query Papers</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Query Papers</div>', unsafe_allow_html=True)
     
     query = st.text_input(
         "Enter your question",
@@ -274,7 +274,7 @@ def query_tab(citation_style: str, top_k: int, similarity_threshold: float):
         help="Ask questions about the processed research papers"
     )
     
-    if st.button("🔍 Get Answer", type="primary") and query:
+    if st.button("Get Answer", type="primary") and query:
         with st.spinner("Retrieving relevant information and synthesizing answer..."):
             try:
                 # Retrieve relevant chunks
@@ -298,16 +298,16 @@ def query_tab(citation_style: str, top_k: int, similarity_threshold: float):
                 
                 # Display answer
                 st.markdown('<div class="answer-box">', unsafe_allow_html=True)
-                st.markdown("### 📝 Answer")
+                st.markdown("### Answer")
                 st.write(answer_obj.answer)
                 st.markdown('</div>', unsafe_allow_html=True)
                 
                 # Display confidence
-                confidence_color = "🟢" if answer_obj.confidence_score > 0.7 else "🟡" if answer_obj.confidence_score > 0.5 else "🔴"
-                st.markdown(f"### 📊 Confidence Score: {confidence_color} {answer_obj.confidence_score:.2f}")
+                confidence_color = "Green" if answer_obj.confidence_score > 0.7 else "Yellow" if answer_obj.confidence_score > 0.5 else "Red"
+                st.markdown(f"### Confidence Score: {confidence_color} {answer_obj.confidence_score:.2f}")
                 
                 # Display retrieval quality
-                with st.expander("📈 Retrieval Quality Analysis"):
+                with st.expander("Retrieval Quality Analysis"):
                     col1, col2 = st.columns(2)
                     
                     with col1:
@@ -318,20 +318,20 @@ def query_tab(citation_style: str, top_k: int, similarity_threshold: float):
                     with col2:
                         st.metric("Total Results", quality.get('total_results', 0))
                         st.metric("Diversity Score", f"{quality.get('diversity_score', 0):.3f}")
-                        st.metric("Quality", "✅ Good" if quality.get('valid') else "⚠️ Needs Improvement")
+                        st.metric("Quality", "Good" if quality.get('valid') else "Needs Improvement")
                     
                     if quality.get('quality_issues'):
                         st.write("**Quality Issues:**")
                         for issue in quality['quality_issues']:
-                            st.write(f"⚠️ {issue}")
+                            st.write(f"Warning: {issue}")
                     
                     if quality.get('suggestions'):
                         st.write("**Suggestions:**")
                         for suggestion in quality['suggestions']:
-                            st.write(f"💡 {suggestion}")
+                            st.write(f"Suggestion: {suggestion}")
                 
                 # Display source chunks
-                with st.expander(f"📄 Source Chunks ({len(chunks)})"):
+                with st.expander(f"Source Chunks ({len(chunks)})"):
                     for i, chunk in enumerate(chunks):
                         metadata = chunk.get('metadata', {})
                         
@@ -346,7 +346,7 @@ def query_tab(citation_style: str, top_k: int, similarity_threshold: float):
                 
                 # Display bibliography
                 if answer_obj.bibliography:
-                    with st.expander("📚 References"):
+                    with st.expander("References"):
                         st.markdown(answer_obj.bibliography)
                 
             except Exception as e:
@@ -354,7 +354,7 @@ def query_tab(citation_style: str, top_k: int, similarity_threshold: float):
 
 def database_tab():
     """Database information tab"""
-    st.markdown('<div class="section-header">📚 Database Information</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-header">Database Information</div>', unsafe_allow_html=True)
     
     try:
         # Get statistics
@@ -379,7 +379,7 @@ def database_tab():
         
         # Display papers
         if papers:
-            st.markdown("### 📋 Papers in Database")
+            st.markdown("### Papers in Database")
             
             search_term = st.text_input("Search papers...", key="paper_search")
             
@@ -391,12 +391,12 @@ def database_tab():
             st.write(f"Showing {len(filtered_papers)} of {len(papers)} papers")
             
             for i, paper in enumerate(filtered_papers):
-                with st.expander(f"📄 {paper}"):
+                with st.expander(f"{paper}"):
                     # Get chunks for this paper
                     paper_chunks = st.session_state.retriever.retrieve_by_paper(paper, top_k=10)
                     
                     if paper_chunks:
-                        st.write(f"📊 Chunks available: {len(paper_chunks)}")
+                        st.write(f"Chunks available: {len(paper_chunks)}")
                         
                         # Show sample chunks
                         for j, chunk in enumerate(paper_chunks[:3]):

@@ -16,7 +16,7 @@ def main():
         from app import main as app_main
         app_main()
     except ImportError:
-        print("❌ Streamlit not installed. Install with: pip install streamlit")
+        print("Streamlit not installed. Install with: pip install streamlit")
         return
 
 if __name__ == '__main__':

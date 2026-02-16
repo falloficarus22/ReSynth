@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Removed all emojis from codebase for cleaner professional appearance
+- Updated CLI output messages to be emoji-free
+- Cleaned up Streamlit web interface text
+- Updated documentation section headers
+
+## [0.1.2] - 2026-02-16
+
+### Changed
+- Removed all emojis from codebase for cleaner professional appearance
+- Updated CLI output messages to be emoji-free
+- Cleaned up Streamlit web interface text
+- Updated documentation section headers
+
+## [0.1.1] - 2026-02-14
+
 ### Added
 - Initial release of ReSynth research paper synthesis agent
 - Paper fetching from arXiv and PubMed

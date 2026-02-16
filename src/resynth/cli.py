@@ -66,9 +66,9 @@ def main():
                 max_papers=args.max_papers,
                 fetch_content=not args.no_content
             )
-            print(f"✅ Processed {len(papers)} papers")
+            print(f"Processed {len(papers)} papers")
             for paper in papers:
-                print(f"   📄 {paper.title}")
+                print(f"   {paper.title}")
         
         elif args.command == 'query':
             answer = agent.query(
@@ -77,29 +77,29 @@ def main():
                 top_k=args.top_k,
                 similarity_threshold=args.threshold
             )
-            print(f"📝 Answer:\n{answer.answer}")
+            print(f"Answer:\n{answer.answer}")
             if answer.bibliography:
-                print(f"\n📚 References:\n{answer.bibliography}")
-            print(f"\n📊 Confidence: {answer.confidence_score:.2f}")
+                print(f"\nReferences:\n{answer.bibliography}")
+            print(f"\nConfidence: {answer.confidence_score:.2f}")
         
         elif args.command == 'stats':
             stats = agent.get_stats()
-            print("📊 System Statistics:")
+            print("System Statistics:")
             print(f"   Total Papers: {stats.get('total_papers', 0)}")
             print(f"   Total Chunks: {stats.get('collection_stats', {}).get('total_chunks', 0)}")
         
         elif args.command == 'papers':
             papers = agent.list_papers()
-            print(f"📚 Papers in database ({len(papers)}):")
+            print(f"Papers in database ({len(papers)}):")
             for paper in papers:
-                print(f"   📄 {paper}")
+                print(f"   {paper}")
         
         elif args.command == 'clear':
             success = agent.clear_database()
             if success:
-                print("✅ Database cleared")
+                print("Database cleared")
             else:
-                print("❌ Failed to clear database")
+                print("Failed to clear database")
         
         elif args.command == 'web':
             from .web import main as web_main

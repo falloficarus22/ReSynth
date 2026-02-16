@@ -222,4 +222,4 @@ Contributors are recognized in:
 - Release notes
 - GitHub contributors list
 
-Thank you for contributing to ReSynth! 🚀
+Thank you for contributing to ReSynth!

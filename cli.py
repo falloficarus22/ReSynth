@@ -68,9 +68,9 @@ Examples:
 def search_and_process_papers(query: str, source: str, max_papers: int, 
                              fetch_content: bool, verbose: bool):
     """Search for papers and process them"""
-    print(f"🔍 Searching for papers: '{query}'")
-    print(f"📚 Source: {source}")
-    print(f"📊 Max papers: {max_papers}")
+    print(f"Searching for papers: '{query}'")
+    print(f"Source: {source}")
+    print(f"Max papers: {max_papers}")
     
     # Initialize fetchers
     arxiv_fetcher = ArxivFetcher(max_results=max_papers)
@@ -79,27 +79,27 @@ def search_and_process_papers(query: str, source: str, max_papers: int,
     # Search for papers
     papers = []
     if source in ["arxiv", "both"]:
-        print("🔎 Searching arXiv...")
+        print("Searching arXiv...")
         arxiv_papers = arxiv_fetcher.search(query)
         papers.extend(arxiv_papers)
         print(f"   Found {len(arxiv_papers)} papers from arXiv")
     
     if source in ["pubmed", "both"]:
-        print("🔎 Searching PubMed...")
+        print("Searching PubMed...")
         pubmed_papers = pubmed_fetcher.search(query)
         papers.extend(pubmed_papers)
         print(f"   Found {len(pubmed_papers)} papers from PubMed")
     
     if not papers:
-        print("❌ No papers found")
+        print("No papers found")
         return
     
     papers = papers[:max_papers]
-    print(f"📋 Processing {len(papers)} papers")
+    print(f"Processing {len(papers)} papers")
     
     # Fetch full content if requested
     if fetch_content:
-        print("📄 Fetching full paper content...")
+        print("Fetching full paper content...")
         for i, paper in enumerate(papers):
             if verbose:
                 print(f"   [{i+1}/{len(papers)}] {paper.title[:50]}...")
@@ -112,19 +112,19 @@ def search_and_process_papers(query: str, source: str, max_papers: int,
                 paper.content = content
     
     # Chunk papers
-    print("✂️  Chunking papers...")
+    print("Chunking papers...")
     chunker = SemanticChunker(chunk_size=Config.CHUNK_SIZE, chunk_overlap=Config.CHUNK_OVERLAP)
     chunks = chunker.chunk_multiple_papers(papers)
     print(f"   Created {len(chunks)} chunks")
     
     # Add to vector store
-    print("💾 Adding to vector store...")
+    print("Adding to vector store...")
     vector_store = VectorStore()
     success = vector_store.add_chunks(chunks)
     
     if success:
-        print("✅ Successfully processed papers!")
-        print("\n📚 Processed papers:")
+        print("Successfully processed papers!")
+        print("\nProcessed papers:")
         for i, paper in enumerate(papers):
             print(f"   {i+1}. {paper.title}")
             print(f"      Authors: {', '.join(paper.authors[:3])}{'...' if len(paper.authors) > 3 else ''}")
@@ -134,12 +134,12 @@ def search_and_process_papers(query: str, source: str, max_papers: int,
                 print(f"      PubMed ID: {paper.pubmed_id}")
             print()
     else:
-        print("❌ Failed to add chunks to vector store")
+        print("Failed to add chunks to vector store")
 
 def query_papers(query: str, top_k: int, threshold: float, citation_style: str, 
                 json_output: bool, verbose: bool):
     """Query the processed papers"""
-    print(f"🔍 Querying papers: '{query}'")
+    print(f"Querying papers: '{query}'")
     
     # Initialize components
     vector_store = VectorStore()
@@ -147,16 +147,16 @@ def query_papers(query: str, top_k: int, threshold: float, citation_style: str,
     synthesizer = AnswerSynthesizer()
     
     # Retrieve relevant chunks
-    print("🔎 Retrieving relevant chunks...")
+    print("Retrieving relevant chunks...")
     chunks = retriever.retrieve(query, top_k=top_k, similarity_threshold=threshold)
     
     if not chunks:
-        print("❌ No relevant information found")
-        print("💡 Try processing some papers first using --search")
+        print("No relevant information found")
+        print("Try processing some papers first using --search")
         return
     
     if verbose:
-        print(f"📊 Retrieved {len(chunks)} chunks")
+        print(f"Retrieved {len(chunks)} chunks")
         for i, chunk in enumerate(chunks):
             metadata = chunk.get('metadata', {})
             print(f"   [{i+1}] {metadata.get('paper_title', 'Unknown')} (similarity: {chunk.get('similarity', 0):.3f})")
@@ -164,13 +164,13 @@ def query_papers(query: str, top_k: int, threshold: float, citation_style: str,
     # Validate retrieval quality
     quality = retriever.validate_retrieval_quality(query, chunks)
     if verbose:
-        print(f"📈 Retrieval quality: {'✅ Good' if quality['valid'] else '⚠️  Needs improvement'}")
+        print(f"Retrieval quality: {'Good' if quality['valid'] else 'Needs improvement'}")
         if quality['quality_issues']:
             for issue in quality['quality_issues']:
-                print(f"   ⚠️  {issue}")
+                print(f"   Warning: {issue}")
     
     # Synthesize answer
-    print("🤖 Synthesizing answer...")
+    print("Synthesizing answer...")
     answer_obj = synthesizer.synthesize_answer(query, chunks, citation_style=citation_style)
     
     # Output results
@@ -193,27 +193,27 @@ def query_papers(query: str, top_k: int, threshold: float, citation_style: str,
         print(json.dumps(result, indent=2))
     else:
         print("\n" + "="*60)
-        print("📝 ANSWER")
+        print("ANSWER")
         print("="*60)
         print(answer_obj.answer)
         
         if answer_obj.bibliography:
             print("\n" + "="*60)
-            print("📚 REFERENCES")
+            print("REFERENCES")
             print("="*60)
             print(answer_obj.bibliography)
         
-        print(f"\n📊 Confidence Score: {answer_obj.confidence_score:.2f}")
-        print(f"📄 Source Chunks: {len(chunks)}")
+        print(f"\nConfidence Score: {answer_obj.confidence_score:.2f}")
+        print(f"Source Chunks: {len(chunks)}")
         
         if quality['quality_issues']:
-            print("⚠️  Quality Issues:")
+            print("Quality Issues:")
             for issue in quality['quality_issues']:
                 print(f"   - {issue}")
 
 def show_stats():
     """Show system statistics"""
-    print("📊 System Statistics")
+    print("System Statistics")
     print("="*40)
     
     vector_store = VectorStore()
@@ -222,15 +222,15 @@ def show_stats():
     stats = retriever.get_retrieval_statistics()
     
     collection_stats = stats.get('collection_stats', {})
-    print(f"📚 Collection: {collection_stats.get('collection_name', 'Unknown')}")
-    print(f"📄 Total Chunks: {collection_stats.get('total_chunks', 0)}")
-    print(f"💾 Storage: {collection_stats.get('persist_directory', 'Unknown')}")
+    print(f"Collection: {collection_stats.get('collection_name', 'Unknown')}")
+    print(f"Total Chunks: {collection_stats.get('total_chunks', 0)}")
+    print(f"Storage: {collection_stats.get('persist_directory', 'Unknown')}")
     
     papers = stats.get('papers', [])
-    print(f"📋 Total Papers: {stats.get('total_papers', 0)}")
+    print(f"Total Papers: {stats.get('total_papers', 0)}")
     
     if papers:
-        print("\n📚 Recent Papers:")
+        print("\nRecent Papers:")
         for i, paper in enumerate(papers[:5], 1):
             print(f"   {i}. {paper}")
         if len(papers) > 5:
@@ -238,33 +238,33 @@ def show_stats():
 
 def list_papers():
     """List all papers in the database"""
-    print("📚 Papers in Database")
+    print("Papers in Database")
     print("="*40)
     
     vector_store = VectorStore()
     papers = vector_store.get_papers_in_collection()
     
     if not papers:
-        print("❌ No papers found in database")
-        print("💡 Try processing some papers first using --search")
+        print("No papers found in database")
+        print("Try processing some papers first using --search")
         return
     
-    print(f"📊 Total Papers: {len(papers)}\n")
+    print(f"Total Papers: {len(papers)}\n")
     
     for i, paper in enumerate(papers, 1):
         print(f"{i:2d}. {paper}")
 
 def clear_database():
     """Clear the database"""
-    print("🗑️  Clearing database...")
+    print("Clearing database...")
     
     vector_store = VectorStore()
     success = vector_store.clear_collection()
     
     if success:
-        print("✅ Database cleared successfully")
+        print("Database cleared successfully")
     else:
-        print("❌ Failed to clear database")
+        print("Failed to clear database")
 
 def main():
     """Main CLI entry point"""

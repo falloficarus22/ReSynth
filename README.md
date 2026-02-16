@@ -88,13 +88,13 @@ resynth-api
 # Interactive docs at http://localhost:8000/docs
 ```
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.8+
 - Optional: OpenAI API key for enhanced answer synthesis
 - Optional: spaCy model (`python -m spacy download en_core_web_sm`)
 
-## 🔧 Configuration
+## Configuration
 
 Create a `.env` file:
 
@@ -122,7 +122,7 @@ CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
 ```
 
-## 📚 Usage Examples
+## Usage Examples
 
 ### Research Paper Analysis
 
